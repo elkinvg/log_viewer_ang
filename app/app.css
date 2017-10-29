@@ -1,1 +1,47 @@
 /* app css stylesheet */
+
+/*html,boby {*/
+    /*height:100%;*/
+    /*width: 100%*/
+/*}*/
+
+.maincont {
+    display: flex;
+    height:100%;
+}
+
+.settpanel {
+    text-align: center;
+    width: 200px;
+    min-width: 200px;
+}
+
+.ui-grid {
+    width: 100%;
+    overflow:auto;
+    word-wrap: normal;
+}
+
+
+.h1-title {
+    color: #2e6c80;
+    text-align: center;
+}
+
+.break-word {
+    word-wrap: break-word;
+}
+
+.ui-grid-viewport .ui-grid-cell-contents {
+    word-wrap: break-word;
+    white-space: normal !important;
+}
+
+.ui-grid-row, .ui-grid-cell {
+    height: auto !important;
+}
+
+.ui-grid-row div[role=row] {
+    display: flex ;
+    align-content: stretch;
+}
