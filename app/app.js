@@ -15,7 +15,7 @@ app.controller('tableCtrl',  function ($scope, $http, uiGridConstants) {
             { field: 'command_name', displayName: 'Команда', width: '15%'},
             // { field: 'alias', displayName: 'Псевдоним', width: '10%'},
             { field: 'user_ip', displayName: 'IP', width: '8%'},
-            { field: 'description', displayName: 'Описание'}
+            { field: 'description', displayName: 'Источник'}
         ],
         paginationPageSizes: [25, 50, 75, 100],
         paginationPageSize: 25
@@ -44,9 +44,17 @@ app.controller('tableCtrl',  function ($scope, $http, uiGridConstants) {
             }
 
             angular.forEach(command_history, function(array_out) {
-                if (device_list[array_out.alias] !== undefined ) {
-                    Object.assign(array_out, device_list[array_out.alias]);
+                // Должны содержаться ключи alias description
+                if (device_list[array_out.device_name] !== undefined ) {
+                    Object.assign(array_out, device_list[array_out.device_name]);
                 }
+                else {
+                    array_out.alias =  "unkwon";
+                    array_out.description = array_out.device_name;
+                }
+                // if (device_list[array_out.alias] !== undefined ) {
+                //     Object.assign(array_out, device_list[array_out.alias]);
+                // }
             });
         }
     }
