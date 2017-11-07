@@ -6,55 +6,105 @@
 <!--[if IE 8]>
 <html lang="en" ng-app="logViewerApp" class="no-js lt-ie9"> <![endif]-->
 <!--[if gt IE 8]><!-->
-<html lang="en" ng-app="logViewerApp" class="no-js"> <!--<![endif]-->
+<html lang="en" ng-app="logViewerApp" class="no-js">
+<!--<![endif]-->
+
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Просмотр журнала</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon"/>
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
     <link rel="stylesheet" href="bower_components/angular-ui-grid/ui-grid.min.css" type="text/css">
     <link rel="stylesheet" href="bower_components/angular-material/angular-material.css" type="text/css">
     <link rel="stylesheet" href="app.css">
 </head>
-<body>
 
-<!--<div ng-view></div>-->
-<!--<div ng-app="logViewerApp" ng-controller="tableCtrl">-->
-    <!--&lt;!&ndash;<div ui-grid="gridLogWs"></div>&ndash;&gt;-->
-<!--</div>-->
-<!--<div ui-grid=""-->
+<body layout="column">
+    <md-tabs flex layout="column" layout-fill>
+        <md-tab flex layout="column" label="Журнал сервера">
+            <md-tab-content flex layout-fill>
+                <div ng-controller="tableServCtrl as ctrl" class="maincont">
+                    <div flex-gt-xs class="settpanel">
+                        <h1 class="h1-title">Журнал сервера</h1>
+                        Отфильтровать по дате
+                        <br>
+                        <br> От:
+                        <br>
+                        <md-datepicker ng-model="ctrl.myDateBgn" ng-change="selectDate()" md-max-date="maxDate"></md-datepicker>
+                        <br>
+                        <br> До:
+                        <br>
+                        <md-datepicker ng-model="ctrl.myDateEnd" ng-change="selectDate()" md-max-date="maxDate"></md-datepicker>
+                        <br>
+                        <br>
+                        <hr size=3px width=100% align="left">
+                        <br> 
+                        Отфильтровать по типу
+                        <br>
+                        <md-input-container style="width: 80%">
+                                <label>Тип сообщения</label>
+                                <md-select ng-model="ctrl.type_mess" md-selected-text="getSelectedType()"
+                                >
+                                        <md-optgroup label="Типы:">
+                                                <md-option ng-value="type_mess" ng-repeat="type_mess in ctrl.types_mess"><b>{{type_mess}}</b></md-option>
+                                        </md-optgroup>
+                                </md-select>
+                        </md-input-container>
+                        <hr size=3px width=100% align="left">
+                        <br>
+                        <md-button class="md-raised" ng-click="resetFilters()">Сбросить фильтры</md-button>
+                        <!-- <md-input-container class="md-block" flex-gt-sm>
+                            <label>Тип сообщения</label>
+                            <md-select ng-model="ctrl.type_mess">
+                              <md-option ng-repeat="type_mess in ctrl.type_messages" value="sss">
+                                sss
+                              </md-option>
+                            </md-select>
+                          </md-input-container> -->
+                    </div>
+                    <div ui-grid="logData" ui-grid-pagination ui-grid-empty-base-layer class="grid"></div>
+                </div>
+            </md-tab-content>
+        </md-tab>
+        <md-tab flex layout="column" label="Журнал команд пользователя">
+            <md-tab-content flex layout-fill>
+                <div ng-controller="tableCtrl as ctrl" class="maincont">
+                    <div flex-gt-xs class="settpanel">
+                        <h1 class="h1-title">Журнал команд</h1>
+                        Отфильтровать по дате
+                        <br>
+                        <br> От:
+                        <br>
+                        <md-datepicker ng-model="ctrl.myDateBgn" ng-change="selectDate()"  md-max-date="maxDate"></md-datepicker>
+                        <br>
+                        <br> До:
 
-<div ng-controller="tableCtrl as ctrl" class="maincont">
-    <div flex-gt-xs class="settpanel">
-        <h1 class="h1-title">Журнал команд</h1>
-        Отфильтровать по дате<br><br>
-        От:<br>
-        <md-datepicker ng-model="ctrl.myDateBgn" ng-change="dateBgnChng()"></md-datepicker>
-        <br><br>
+                        <br>
+                        <md-datepicker ng-model="ctrl.myDateEnd" ng-change="selectDate()" md-max-date="maxDate"></md-datepicker>
+                        <br>
+                        <br>
+                        <hr size=3px width=100% align="left">
+                        <br>
+                        <md-button class="md-raised" ng-click="resetFilters()">Сбросить фильтры</md-button>
+                    </div>
+                    <div ui-grid="logData" ui-grid-pagination ui-grid-empty-base-layer class="grid"></div>
+                </div>
+            </md-tab-content>
+        </md-tab>
+    </md-tabs>
 
-        До:<br>
-        <md-datepicker ng-model="ctrl.myDateEnd" ng-change="dateEndChng()" md-max-date="maxDate"></md-datepicker>
-        <br><br>
-        <hr size=3px width=100% align="left">
-    </div>
-    <!--<md-datepicker ng-model="ctrl.myDate" md-placeholder="Enter date"></md-datepicker>-->
-    <div id="logGrid1" ui-grid="logData" ui-grid-pagination ui-grid-empty-base-layer class="grid"></div>
-</div>
-
-<!--"{ data: myData }"-->
-<!-- In production use:
-<script src="//ajax.googleapis.com/ajax/libs/angularjs/x.x.x/angular.min.js"></script>
--->
-
-<script src="bower_components/angular/angular.js"></script>
-<script src="bower_components/angular-animate/angular-animate.min.js"></script>
-<script src="bower_components/angular-aria/angular-aria.min.js"></script>
-<script src="bower_components/angular-messages/angular-messages.min.js"></script>
-<script src="bower_components/angular-ui-grid/ui-grid.min.js"></script>
-<script src="bower_components/angular-material/angular-material.min.js"></script>
-<script src="bower_components/moment/min/moment.min.js"></script>
-<script src="app.js"></script>
+    <script src="bower_components/angular/angular.js"></script>
+    <script src="bower_components/angular-animate/angular-animate.min.js"></script>
+    <script src="bower_components/angular-aria/angular-aria.min.js"></script>
+    <script src="bower_components/angular-messages/angular-messages.min.js"></script>
+    <script src="bower_components/angular-ui-grid/ui-grid.min.js"></script>
+    <script src="bower_components/angular-material/angular-material.min.js"></script>
+    <script src="bower_components/moment/min/moment.min.js"></script>
+    <script src="app.js"></script>
+    <script src="log_viewer_app_user.js"></script>
+    <script src="log_viewer_app_serv.js"></script>
 </body>
+
 </html>
