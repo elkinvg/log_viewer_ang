@@ -70,10 +70,10 @@ app.controller('CommonController', function ($scope, $http) {
                 // В таблице `tango_web_auth`.`command_history`  comm_timestamp
                 // Значения для sender определены в var variables
                 if (sender == "tangodev_log"){
-                    // array_out.timestamp остаётся
+                    array_out.timestamp = new Date(array_out.timestamp);
                 }
                 else if (sender == "command_history") {
-                    array_out.timestamp = array_out.comm_timestamp;
+                    array_out.timestamp = new Date(array_out.comm_timestamp);
                     delete array_out.comm_timestamp;
                 }
             });

@@ -18,7 +18,8 @@ app.controller('tableServCtrl', function ($scope, $http, $controller, uiGridCons
         showGridFooter: true,
         // enableFiltering: true,
         columnDefs: [
-            { field: 'timestamp', displayName: 'Время записи', width: '10%' },
+            { field: 'timestamp', displayName: 'Время записи', width: '10%', type: 'date',
+            cellFilter: 'date:"dd-MM-yyyy HH:mm:ss"'},
             // { field: 'device_name', displayName: 'Имя девайса'},
             {
                 field: 'type', displayName: 'Тип', width: '8%',

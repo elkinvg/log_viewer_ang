@@ -1,0 +1,47 @@
+<body>
+  <md-dialog aria-label="Информация по команде">
+    <form>
+      <md-toolbar>
+        <div class="md-toolbar-tools">
+          <h2>Информация по команде</h2>
+          <span flex></span>
+          <md-button class="md-icon-button" ng-click="cancel()">
+            <md-icon md-svg-src="img/icons/ic_close_24px.svg" aria-label="Close dialog"></md-icon>
+          </md-button>
+        </div>
+      </md-toolbar>
+      <md-dialog-content style="max-width:800px;max-height:810px; ">
+        <md-content flex layout-padding class="dialog_command_descr">
+          <h2 class="md-title">имя девайса и время запуска команды</h2>
+          <p>
+            <b>Имя девайса: </b> {{dataFromRow.device_name}}
+            <b>
+              <br>
+              <br> Время запуска: </b> {{dataFromRow.timestamp | date:"dd-MM-yyyy HH:mm:ss"}}
+          </p>
+          <h2 class="md-title">описание источника</h2>
+          <p>
+            {{dataFromRow.description}}
+          </p>
+          <h2 class="md-title">Команда</h2>
+          <p>
+            <b>Имя команды:
+              <span style="color:red;">{{dataFromRow.command_name}}</span>
+            </b>
+            <br>
+            <br>
+            <b>Аргументы:
+              <span style="color:rgb(172, 60, 60);"> {{dataFromRow.argin}}</span>
+            </b>
+          </p>
+        </md-content>
+      </md-dialog-content>
+
+      <md-dialog-actions layout="row">
+        <md-button ng-click="cancel()" style="margin-right:20px;">
+          Закрыть
+        </md-button>
+      </md-dialog-actions>
+    </form>
+  </md-dialog>
+</body>
