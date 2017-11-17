@@ -3,7 +3,7 @@
     <form>
       <md-toolbar>
         <div class="md-toolbar-tools">
-          <h2>Информация по команде</h2>
+          <h2>Информация по записи</h2>
           <span flex></span>
           <md-button class="md-icon-button" ng-click="cancel()">
             <md-icon md-svg-src="img/icons/ic_close_24px.svg" aria-label="Close dialog"></md-icon>
@@ -19,20 +19,37 @@
               <br>
               <br> Время запуска: </b> {{dataFromRow.timestamp | date:"dd-MM-yyyy HH:mm:ss"}}
           </p>
-          <h2 class="md-title">описание источника</h2>
+          <h2 class="md-title">описание адресата</h2>
           <p>
             {{dataFromRow.description}}
           </p>
-          <h2 class="md-title">Команда</h2>
+          <h2 class="md-title">описание записи</h2>
           <p>
-            <b>Имя команды:
-              <span style="color:red;">{{dataFromRow.command_name}}</span>
-            </b>
+            <!--  -->
+            <b>Тип записи:</b>
+            <span class={{dataFromRow.class_comm_or_attr}}>{{dataFromRow.type_req}}</span>
+
             <br>
             <br>
-            <b>Аргументы:
-              <span style="color:rgb(172, 60, 60);"> {{dataFromRow.argin}}</span>
+
+            <!--  -->
+            <b>Статус выполнения:</b>
+            <span class={{dataFromRow.class_comm_or_attr}}> {{dataFromRow.status === "1" ? "Выполнено" : "Не выполнено"}} </span>
+
+            <br>
+            <br>
+
+            <!--  -->
+            <b>Имя {{dataFromRow.is_command ? "команды: " : "атрибута: "}}</b>
+            <b>
+              <span class={{dataFromRow.class_comm_or_attr}}> {{dataFromRow.command_name}} </span>
             </b>
+
+            <br>
+            <br>
+            <!--  -->
+            <b>Аргументы: </b>
+            <span class={{dataFromRow.class_comm_or_attr}}> {{dataFromRow.argin}} </span>
           </p>
         </md-content>
       </md-dialog-content>

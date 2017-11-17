@@ -6,7 +6,18 @@
 /*}*/
 
 .dialog_command_descr > .md-title {
+    text-decoration: underline;
+    color: rgb(48, 6, 51);
+}
+
+
+/* Для высвечивания типа команды (команда или запись атрибута) */
+.iscommand {
     color: rgb(15, 19, 158);
+}
+
+.isattr {
+    color: rgb(160, 42, 77);
 }
 
 .maincont {
