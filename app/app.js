@@ -119,7 +119,7 @@ app.controller('CommonController', function ($scope, $http) {
         var newdt = [];
         angular.forEach($scope.logData.firstData, function (fromLogData) {
             var date = new Date(fromLogData.timestamp);
-            if (date > bgnDt && date < endDt) {
+            if (date >= bgnDt && date <= endDt) {
                 newdt.push(fromLogData);
             }
         });
